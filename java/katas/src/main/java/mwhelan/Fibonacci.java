@@ -1,6 +1,8 @@
+package mwhelan;
+
 /**
  * PROBLEM:
- * Given a number i return the Fibonacci number at this
+ * Given a number i return the mwhelan.Fibonacci number at this
  * position.
  *
  * @author Mike Lowe

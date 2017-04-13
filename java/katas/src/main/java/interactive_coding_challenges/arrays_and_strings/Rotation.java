@@ -1,3 +1,5 @@
+package interactive_coding_challenges.arrays_and_strings;
+
 /**
  * PROBLEM:
  * Determine if a string s1 is a rotation of another string s2.

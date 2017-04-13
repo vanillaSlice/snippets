@@ -1,3 +1,5 @@
+package mwhelan;
+
 import org.junit.Test;
 
 import java.util.Set;

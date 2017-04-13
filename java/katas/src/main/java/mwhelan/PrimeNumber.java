@@ -1,3 +1,5 @@
+package mwhelan;
+
 /**
  * PROBLEM
  * Given a number i return if it is prime.

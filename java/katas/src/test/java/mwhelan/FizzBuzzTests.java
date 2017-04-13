@@ -1,3 +1,5 @@
+package mwhelan;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,12 +49,12 @@ public class FizzBuzzTests {
 
     @Test
     public void test_evaluate_15ReturnsFizzBuzz() {
-        assertEquals("FizzBuzz", fizzBuzz.evaluate(15));
+        assertEquals("mwhelan.FizzBuzz", fizzBuzz.evaluate(15));
     }
 
     @Test
     public void test_evaluate_30ReturnsFizzBuzz() {
-        assertEquals("FizzBuzz", fizzBuzz.evaluate(30));
+        assertEquals("mwhelan.FizzBuzz", fizzBuzz.evaluate(30));
     }
 
 }

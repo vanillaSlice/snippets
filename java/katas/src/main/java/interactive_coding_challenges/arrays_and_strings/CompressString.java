@@ -1,3 +1,5 @@
+package interactive_coding_challenges.arrays_and_strings;
+
 /**
  * PROBLEM:
  * Compress a string such that 'AAABCCDDDD' becomes 'A3BC2D4'.

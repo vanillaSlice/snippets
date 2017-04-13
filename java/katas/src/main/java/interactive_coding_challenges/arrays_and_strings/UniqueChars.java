@@ -1,3 +1,5 @@
+package interactive_coding_challenges.arrays_and_strings;
+
 import java.util.HashSet;
 import java.util.Set;
 

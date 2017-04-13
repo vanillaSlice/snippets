@@ -1,9 +1,11 @@
+package mwhelan;
+
 /**
  * PROBLEM
  * Given a number i return:
  * - "Fizz" if i is divisible by 3
  * - "Buzz" if i is divisible by 5
- * - "FizzBuzz" if i is divisible by 3 and 5
+ * - "mwhelan.FizzBuzz" if i is divisible by 3 and 5
  * - "Whizz" if i is a prime number
  * - "FizzWhizz" if i is divisible by 3 and a prime number (i.e. 3 itself)
  * - "BuzzWhizz" if i is divisible by 5 and a prime number (i.e. 5 itself)

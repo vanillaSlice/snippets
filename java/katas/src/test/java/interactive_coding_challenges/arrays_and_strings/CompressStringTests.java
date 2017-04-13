@@ -1,6 +1,9 @@
+package interactive_coding_challenges.arrays_and_strings;
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * @author Mike Lowe
