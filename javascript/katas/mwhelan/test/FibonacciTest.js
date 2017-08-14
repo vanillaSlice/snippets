@@ -2,7 +2,7 @@ var assert = require('assert');
 var Fibonacci = require('../src/Fibonacci.js');
 
 describe('Fibonacci', function () {
-  describe('#calculate', function () {
+  describe('#calculate()', function () {
     it('should return 0 when passed 0', function () {
       assert.equal(0, Fibonacci.calculate(0));
     });
