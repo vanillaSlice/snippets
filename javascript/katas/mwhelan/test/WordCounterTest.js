@@ -2,7 +2,7 @@ var assert = require('assert');
 var WordCounter = require('../src/WordCounter.js');
 
 describe('WordCounter', function () {
-  describe('#count', function () {
+  describe('#count()', function () {
     it('\'\' should return {}', function () {
       assert.deepEqual({}, WordCounter.count(''));
     });
