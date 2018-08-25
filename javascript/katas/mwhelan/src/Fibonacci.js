@@ -8,7 +8,7 @@
 
 const Fibonacci = {
 
-  calculate: function calculate(n) {
+  calculate: n => {
     if (n == 0) return 0;
     if (n == 1 || n == 2) return 1;
     let current = 2;

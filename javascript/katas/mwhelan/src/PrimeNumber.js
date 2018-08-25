@@ -1,5 +1,5 @@
 /*
- * PROBLEM
+ * PROBLEM:
  * Given a number n return if it is prime.
  */
 
@@ -7,10 +7,10 @@
 
 const PrimeNumber = {
 
-  isPrime: (n) => {
+  isPrime: n => {
     if (n < 2) return false;
-    for (let i = 2, mid = n / 2; i <= mid; i++) {
-      if (n % i === 0) {
+    for (let i = 2, sqrt = Math.sqrt(n); i <= sqrt; i++) {
+      if (n % i == 0) {
         return false;
       }
     }

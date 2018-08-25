@@ -14,8 +14,6 @@ const Permutations = (s1, s2) => {
   return sortString(s1) === sortString(s2);
 }
 
-const sortString = (str) => {
-  return str.split('').sort().join('');
-}
+const sortString = str => str.split('').sort().join('');
 
 module.exports = Permutations;

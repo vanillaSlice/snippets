@@ -1,21 +1,21 @@
 /*
- * PROBLEM
- * Given a number i return:
- * - 'Fizz' if i is divisible by 3
- * - 'Buzz' if i is divisible by 5
- * - 'FizzBuzz' if i is divisible by 3 and 5
- * - i if i does not meet any of these conditions
+ * PROBLEM:
+ * Given a number n return:
+ * - 'Fizz' if n is divisible by 3
+ * - 'Buzz' if n is divisible by 5
+ * - 'FizzBuzz' if n is divisible by 3 and 5
+ * - n if n does not meet any of these conditions
  */
 
 'use strict';
 
 const FizzBuzz = {
 
-  run: (i) => {
+  run: n => {
     let result = '';
-    if (i % 3 === 0) result = 'Fizz';
-    if (i % 5 === 0) result += 'Buzz';
-    if (result === '') result = i;
+    if (n % 3 === 0) result = 'Fizz';
+    if (n % 5 === 0) result += 'Buzz';
+    if (result === '') result = n.toString();
     return result;
   }
 

@@ -23,9 +23,7 @@ const WordCounter = () => {
       }, {});
   }
 
-  return {
-    count: count
-  };
+  return { count };
 }
 
 module.exports = WordCounter();

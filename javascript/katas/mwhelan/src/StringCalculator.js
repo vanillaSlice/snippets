@@ -45,9 +45,7 @@ const StringCalculator = () => {
     return customDelimiter;
   }
 
-  return {
-    add: add
-  };
+  return { add };
 
 };
 

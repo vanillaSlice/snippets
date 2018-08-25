@@ -6,7 +6,7 @@
 
 'use strict';
 
-const UniqueChars = (str) => {
+const UniqueChars = str => {
   const counts = {};
   
   for (let i = 0, length = str.length; i < length; i++) {

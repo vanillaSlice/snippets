@@ -5,7 +5,7 @@
 
 'use strict';
 
-module.exports = (length) => {
+module.exports = length => {
   const result = [];
 
   for (var i = 1; i <= length; i++) {

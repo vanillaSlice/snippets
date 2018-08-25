@@ -6,7 +6,7 @@
 
 'use strict';
 
-module.exports = (input) => {
+module.exports = input => {
   let currentChar = '';
   let currentCount = 0;
   let compressed = '';

@@ -1,5 +1,5 @@
 /**
- * PROBLEM
+ * PROBLEM:
  * Given a number n return:
  * - 'Fizz' if n is divisible by 3
  * - 'Buzz' if n is divisible by 5
@@ -19,7 +19,7 @@ const FizzBuzzWhizz = {
     if (n % 3 == 0) result += 'Fizz';
     if (n % 5 == 0) result += 'Buzz';
     if (isPrime(n)) result += 'Whizz';
-    if (result == '') result += n;
+    if (result == '') result += n.toString();
     return result;
   }
 

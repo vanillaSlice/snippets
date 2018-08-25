@@ -1,1 +1,1 @@
-My attempt at solving the problems [here](https://github.com/mwhelan/Katas).
+My attempt at solving some of the problems [here](https://github.com/mwhelan/Katas).
