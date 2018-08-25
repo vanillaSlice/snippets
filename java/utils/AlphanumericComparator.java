@@ -7,9 +7,11 @@
 import java.math.BigInteger;
 import java.util.Comparator;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * {@code AlphanumericComparator} instances are used to compare {@link String}s
- * where the numeric value of digits is taken into account.
+ * where the numeric values of digits are taken into account.
  * <p>
  * When calling {@link String#compareTo(String)} the value of the character is used.
  * So for example, "string10" is evaluated to be less than "string2". If we take into
@@ -20,79 +22,77 @@ import java.util.Comparator;
  * "string1".
  *
  * @author Mike Lowe
+ * @see Comparator
  */
 public final class AlphanumericComparator implements Comparator<String> {
 
-    @Override
-    public int compare(String s1, String s2) {
-        // separate strings into chunks for comparison
-        String[] s1Chunks = getChunks(s1);
-        String[] s2Chunks = getChunks(s2);
+  @Override
+  public int compare(final String s1, final String s2) {
+    requireNonNull(s1, "s1 cannot be null");
+    requireNonNull(s2, "s2 cannot be null");
 
-        // will stop IndexOutOfBoundsException
-        int comparisonsToMake = Math.min(s1Chunks.length, s2Chunks.length);
-        for (int i = 0; i < comparisonsToMake; i++) {
-            String s1Chunk = s1Chunks[i];
-            String s2Chunk = s2Chunks[i];
+    // separate strings into chunks for comparison
+    final String[] s1Chunks = getChunks(s1);
+    final String[] s2Chunks = getChunks(s2);
 
-            // determine the comparison value ensuring that digits are not evaluated as strings
-            int comparisonValue;
-            DigitParseResult s1Result = parseDigits(s1Chunk);
-            DigitParseResult s2Result = parseDigits(s2Chunk);
-            if (s1Result.isDigits && s2Result.isDigits) {
-                comparisonValue = s1Result.digits.compareTo(s2Result.digits);
-            } else {
-                comparisonValue = s1Chunk.compareTo(s2Chunk);
-            }
+    // will stop IndexOutOfBoundsException
+    final int comparisonsToMake = Math.min(s1Chunks.length, s2Chunks.length);
 
-            if (comparisonValue != 0) {
-                // chunks are different so return comparison value
-                return comparisonValue;
-            }
-        }
+    for (int i = 0; i < comparisonsToMake; i++) {
+      final String s1Chunk = s1Chunks[i];
+      final String s2Chunk = s2Chunks[i];
 
-        // STRINGS ARE ALPHANUMERICALLY EQUIVALENT UP TO THIS POINT
+      // determine the comparison value ensuring that digits are not evaluated as strings
+      final int comparisonValue;
+      final DigitParseResult s1Result = parseDigits(s1Chunk);
+      final DigitParseResult s2Result = parseDigits(s2Chunk);
+      if (s1Result.isDigits && s2Result.isDigits) {
+        comparisonValue = s1Result.digits.compareTo(s2Result.digits);
+      } else {
+        comparisonValue = s1Chunk.compareTo(s2Chunk);
+      }
 
-        // if either string is longer then the longer string is determined to be greater
-        if (s1Chunks.length > s2Chunks.length) {
-            return 1;
-        } else if (s2Chunks.length > s1Chunks.length) {
-            return -1;
-        } else {
-            // strings are the same length and alphanumerically equivalent
-            return 0;
-        }
+      if (comparisonValue != 0) {
+        // chunks are different so return comparison value
+        return comparisonValue;
+      }
     }
 
-    /*
-     * Splits string into chunks of characters and numeric characters.
-     * e.g. "1-name.1:0.txt" will be split into ["1", "-name.", "1", ":", "0", ".txt"]
-     */
-    private static String[] getChunks(String str) {
-        return str.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+    // strings are alphanumerically equivalent up to this point.
+    // the string that has more chunks will be determined to be greater
+    // e.g. "string1-2" will be greater than "string1-"
+    return Integer.compare(s1Chunks.length, s2Chunks.length);
+  }
+
+  /*
+   * Splits string into chunks of characters and numeric characters.
+   * e.g. "1-name.1:0.txt" will be split into ["1", "-name.", "1", ":", "0", ".txt"]
+   */
+  private static String[] getChunks(final String str) {
+    return str.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+  }
+
+  /*
+   * Determine if the string contains digits and store this along with the value.
+   */
+  private static DigitParseResult parseDigits(final String str) {
+    try {
+      return new DigitParseResult(true, new BigInteger(str));
+    } catch (final NumberFormatException e) {
+      return new DigitParseResult(false, null);
+    }
+  }
+
+  private static class DigitParseResult {
+
+    private final boolean isDigits;
+    private final BigInteger digits;
+
+    private DigitParseResult(final boolean isDigits, final BigInteger digits) {
+      this.isDigits = isDigits;
+      this.digits = digits;
     }
 
-    /*
-     * Determine if the string contains digits and store this along with the value.
-     */
-    private static DigitParseResult parseDigits(String str) {
-        try {
-            return new DigitParseResult(true, new BigInteger(str));
-        } catch (NumberFormatException e) {
-            return new DigitParseResult(false, BigInteger.ZERO);
-        }
-    }
-
-    private static class DigitParseResult {
-
-        private boolean isDigits;
-        private BigInteger digits;
-
-        private DigitParseResult(boolean isDigits, BigInteger digits) {
-            this.isDigits = isDigits;
-            this.digits = digits;
-        }
-
-    }
+  }
 
 }

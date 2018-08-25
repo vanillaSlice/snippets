@@ -17,122 +17,122 @@ import java.util.Set;
  *
  * @author Mike Lowe
  */
-public class Pager {
+public final class Pager {
 
-    private int numberOfItems;
-    private int itemsPerPage;
-    private int offset;
-    private int numberOfPages;
-    private int currentPage;
-    private boolean prevVisible;
-    private boolean nextVisible;
-    private Set<Integer> linksToPrint = new LinkedHashSet<>();
+  private int numberOfItems;
+  private int itemsPerPage;
+  private int offset;
+  private int numberOfPages;
+  private int currentPage;
+  private boolean prevVisible;
+  private boolean nextVisible;
+  private final Set<Integer> linksToPrint = new LinkedHashSet<>();
 
-    public void update(int numberOfItems, int itemsPerPage, int offset) {
-        setNumberOfItems(numberOfItems);
-        setItemsPerPage(itemsPerPage);
-        setOffset(offset);
-        updateNumberOfPages();
-        updateCurrentPage();
-        updatePrevVisible();
-        updateNextVisible();
-        updateLinksToPrint();
+  public void update(final int numberOfItems, final int itemsPerPage, final int offset) {
+    setNumberOfItems(numberOfItems);
+    setItemsPerPage(itemsPerPage);
+    setOffset(offset);
+    updateNumberOfPages();
+    updateCurrentPage();
+    updatePrevVisible();
+    updateNextVisible();
+    updateLinksToPrint();
+  }
+
+  private void setNumberOfItems(final int numberOfItems) {
+    this.numberOfItems = numberOfItems;
+    if (this.numberOfItems < 0) {
+      throw new IllegalArgumentException("number of items cannot be less than 0");
     }
+  }
 
-    private void setNumberOfItems(int numberOfItems) {
-        this.numberOfItems = numberOfItems;
-        if (this.numberOfItems < 0) {
-            throw new IllegalArgumentException("number of items cannot be less than 0");
-        }
-    }
+  public int getNumberOfItems() {
+    return numberOfItems;
+  }
 
-    public int getNumberOfItems() {
-        return numberOfItems;
+  private void setItemsPerPage(final int itemsPerPage) {
+    this.itemsPerPage = itemsPerPage;
+    if (this.itemsPerPage < 1) {
+      throw new IllegalArgumentException("items per page cannot be less than 1");
     }
+  }
 
-    private void setItemsPerPage(int itemsPerPage) {
-        this.itemsPerPage = itemsPerPage;
-        if (this.itemsPerPage < 1) {
-            throw new IllegalArgumentException("items per page cannot be less than 1");
-        }
-    }
+  public int getItemsPerPage() {
+    return itemsPerPage;
+  }
 
-    public int getItemsPerPage() {
-        return itemsPerPage;
+  private void setOffset(final int offset) {
+    this.offset = offset;
+    if (this.offset < 0) {
+      throw new IllegalArgumentException("offset cannot be less than 0");
+    } else if (this.offset > this.numberOfItems) {
+      throw new IllegalArgumentException("offset cannot be greater than number of items");
     }
+  }
 
-    private void setOffset(int offset) {
-        this.offset = offset;
-        if (this.offset < 0) {
-            throw new IllegalArgumentException("offset cannot be less than 0");
-        } else if (this.offset > this.numberOfItems) {
-            throw new IllegalArgumentException("offset cannot be greater than number of items");
-        }
-    }
+  public int getOffset() {
+    return offset;
+  }
 
-    public int getOffset() {
-        return offset;
+  private void updateNumberOfPages() {
+    if (numberOfItems == 0) {
+      numberOfPages = 1;
+    } else {
+      numberOfPages = numberOfItems / itemsPerPage;
+      if (numberOfItems % itemsPerPage != 0) {
+        numberOfPages++;
+      }
     }
+  }
 
-    private void updateNumberOfPages() {
-        if (numberOfItems == 0) {
-            numberOfPages = 1;
-        } else {
-            numberOfPages = numberOfItems / itemsPerPage;
-            if (numberOfItems % itemsPerPage != 0) {
-                numberOfPages++;
-            }
-        }
-    }
+  public int getNumberOfPages() {
+    return numberOfPages;
+  }
 
-    public int getNumberOfPages() {
-        return numberOfPages;
+  private void updateCurrentPage() {
+    if (offset == 0) {
+      currentPage = 1;
+    } else {
+      currentPage = offset / itemsPerPage;
+      if (offset % itemsPerPage != 0) {
+        currentPage++;
+      }
     }
+  }
 
-    private void updateCurrentPage() {
-        if (offset == 0) {
-            currentPage = 1;
-        } else {
-            currentPage = offset / itemsPerPage;
-            if (offset % itemsPerPage != 0) {
-                currentPage++;
-            }
-        }
-    }
+  public int getCurrentPage() {
+    return currentPage;
+  }
 
-    public int getCurrentPage() {
-        return currentPage;
-    }
+  private void updatePrevVisible() {
+    prevVisible = currentPage > 1;
+  }
 
-    private void updatePrevVisible() {
-        prevVisible = currentPage > 1;
-    }
+  public boolean isPrevVisible() {
+    return prevVisible;
+  }
 
-    public boolean isPrevVisible() {
-        return prevVisible;
-    }
+  private void updateNextVisible() {
+    nextVisible = currentPage < numberOfPages;
+  }
 
-    private void updateNextVisible() {
-        nextVisible = currentPage < numberOfPages;
-    }
+  public boolean isNextVisible() {
+    return nextVisible;
+  }
 
-    public boolean isNextVisible() {
-        return nextVisible;
+  private void updateLinksToPrint() {
+    linksToPrint.clear();
+    if (isPrevVisible()) {
+      linksToPrint.add(currentPage - 1);
     }
+    linksToPrint.add(currentPage);
+    if (isNextVisible()) {
+      linksToPrint.add(currentPage + 1);
+    }
+  }
 
-    private void updateLinksToPrint() {
-        linksToPrint.clear();
-        if (isPrevVisible()) {
-            linksToPrint.add(currentPage - 1);
-        }
-        linksToPrint.add(currentPage);
-        if (isNextVisible()) {
-            linksToPrint.add(currentPage + 1);
-        }
-    }
-
-    public Set<Integer> getLinksToPrint() {
-        return new LinkedHashSet<>(linksToPrint);
-    }
+  public Set<Integer> getLinksToPrint() {
+    return new LinkedHashSet<>(linksToPrint);
+  }
 
 }

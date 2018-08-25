@@ -11,6 +11,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * {@code ScreenManager} is used to manage {@link Screen}s in
  * {@link Game} instances.
@@ -19,58 +21,61 @@ import com.badlogic.gdx.utils.Disposable;
  */
 public final class ScreenManager implements Disposable {
 
-    private final Game game;
-    private final Array<Screen> screens = new Array<Screen>();
+  private final Game game;
+  private final Array<Screen> screens = new Array<Screen>();
 
-    /**
-     * Creates a new {@code ScreenManager} with a reference to the
-     * {@link Game}.
-     *
-     * @param game reference to the {@link Game}
-     */
-    public ScreenManager(Game game) {
-        this.game = game;
-    }
+  /**
+   * Creates a new {@code ScreenManager} with a reference to the
+   * {@link Game}.
+   *
+   * @param game reference to the {@link Game}
+   * @throws NullPointerException if {@code game} is {@code null}
+   */
+  public ScreenManager(final Game game) {
+    this.game = requireNonNull(game, "game cannot be null");
+  }
 
-    /**
-     * Sets the {@link Screen} to display. Note that any existing
-     * {@link Screen}s are NOT disposed.
-     *
-     * @param screen the {@link Screen} to display
-     */
-    public void setScreen(Screen screen) {
-        screens.add(screen);
-        game.setScreen(screen);
-    }
+  /**
+   * Sets the {@link Screen} to display. Note that any existing
+   * {@link Screen}s are NOT disposed.
+   *
+   * @param screen the {@link Screen} to display
+   * @throws NullPointerException if {@code screen} is {@code null}
+   */
+  public void setScreen(final Screen screen) {
+    requireNonNull(screen, "screen cannot be null");
+    screens.add(screen);
+    game.setScreen(screen);
+  }
 
-    /**
-     * Switches to the previous {@link Screen}, if one exists. Note that
-     * this removes and disposes the current {@link Screen}, if one exists.
-     */
-    public void switchToPreviousScreen() {
-        // remove and dispose current screen
-        if (screens.size != 0) {
-            screens.pop().dispose();
-            // switch to previous screen
-            if (screens.size != 0) {
-                game.setScreen(screens.peek());
-            }
-        }
+  /**
+   * Switches to the previous {@link Screen}, if one exists. Note that
+   * this removes and disposes the current {@link Screen}, if one exists.
+   */
+  public void switchToPreviousScreen() {
+    // remove and dispose current screen
+    if (screens.size != 0) {
+      screens.pop().dispose();
+      // switch to previous screen
+      if (screens.size != 0) {
+        game.setScreen(screens.peek());
+      }
     }
+  }
 
-    /**
-     * Disposes and clears all {@link Screen}s.
-     */
-    public void disposeAndClearAllScreens() {
-        for (Screen screen : screens) {
-            screen.dispose();
-        }
-        screens.clear();
+  /**
+   * Disposes and clears all {@link Screen}s.
+   */
+  public void disposeAndClearAllScreens() {
+    for (final Screen screen : screens) {
+      screen.dispose();
     }
+    screens.clear();
+  }
 
-    @Override
-    public void dispose() {
-        disposeAndClearAllScreens();
-    }
+  @Override
+  public void dispose() {
+    disposeAndClearAllScreens();
+  }
 
 }

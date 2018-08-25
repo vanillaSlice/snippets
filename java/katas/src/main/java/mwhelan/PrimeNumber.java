@@ -1,28 +1,31 @@
 package mwhelan;
 
 /**
- * PROBLEM
- * Given a number i return if it is prime.
+ * PROBLEM:
+ * Given a number n return if it is prime.
  *
  * @author Mike Lowe
  */
-public class PrimeNumber {
+public final class PrimeNumber {
 
-    // don't want instances
-    private PrimeNumber() {
+  // don't want instances
+  private PrimeNumber() {
+  }
+
+  public static boolean isPrime(final int n) {
+    if (n < 2) {
+      return false;
     }
 
-    public static boolean isPrime(int i) {
-        if (i <= 1) {
-            return false;
-        }
-        int mid = i / 2;
-        for (int j = 2; j <= mid; j++) {
-            if (i % j == 0) {
-                return false;
-            }
-        }
-        return true;
+    final double maxPossibleDivisor = Math.floor(Math.sqrt(n));
+
+    for (int i = 2; i <= maxPossibleDivisor; i++) {
+      if (n % i == 0) {
+        return false;
+      }
     }
+
+    return true;
+  }
 
 }

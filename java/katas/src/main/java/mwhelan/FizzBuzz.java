@@ -1,36 +1,38 @@
 package mwhelan;
 
 /**
- * PROBLEM
- * Given a number i return:
- * - "Fizz" if i is divisible by 3
- * - "Buzz" if i is divisible by 5
- * - "mwhelan.FizzBuzz" if i is divisible by 3 and 5
- * - i as a string if i does not meet any of these conditions
+ * PROBLEM:
+ * Given a number n return:
+ * - "Fizz" if n is divisible by 3
+ * - "Buzz" if n is divisible by 5
+ * - "FizzBuzz" if n is divisible by 3 and 5
+ * - n as a string if n does not meet any of these conditions
  *
  * @author Mike Lowe
  */
-public class FizzBuzz {
+public final class FizzBuzz {
 
-    public String evaluate(int i) {
-        boolean isDivisibleBy3 = isDivisibleBy3(i);
-        boolean isDivisibleBy5 = isDivisibleBy5(i);
-        if (isDivisibleBy3 && isDivisibleBy5) {
-            return "mwhelan.FizzBuzz";
-        } else if (isDivisibleBy3) {
-            return "Fizz";
-        } else if (isDivisibleBy5) {
-            return "Buzz";
-        }
-        return Integer.toString(i);
+  // don't want instances
+  private FizzBuzz() {
+  }
+
+  public static String evaluate(final int n) {
+    final StringBuilder message = new StringBuilder();
+
+    final boolean isDivisibleBy3 = n % 3 == 0;
+    final boolean isDivisibleBy5 = n % 5 == 0;
+
+    if (isDivisibleBy3) {
+      message.append("Fizz");
+    }
+    if (isDivisibleBy5) {
+      message.append("Buzz");
+    }
+    if (message.length() == 0) {
+      message.append(n);
     }
 
-    private boolean isDivisibleBy3(int i) {
-        return i % 3 == 0;
-    }
-
-    private boolean isDivisibleBy5(int i) {
-        return i % 5 == 0;
-    }
+    return message.toString();
+  }
 
 }

@@ -10,31 +10,31 @@ import java.util.Set;
  *
  * @author Mike Lowe
  */
-public class Anagrams {
+public final class Anagrams {
 
-    // don't want instance
-    private Anagrams() {
+  // don't want instances
+  private Anagrams() {
+  }
+
+  public static Set<String> get(final String input) {
+    if (input == null) {
+      return Collections.emptySet();
+    } else if (input.length() <= 1) {
+      return Collections.singleton(input);
     }
 
-    public static Set<String> get(String input) {
-        if (input == null) {
-            return Collections.emptySet();
-        } else if (input.length() <= 1) {
-            return Collections.singleton(input);
-        }
+    final Set<String> anagrams = new HashSet<>();
 
-        Set<String> anagrams = new HashSet<>();
-
-        for (int i = 0, length = input.length(); i < length; i++) {
-            char leadingChar = input.charAt(i);
-            String substringWithoutLeadingChar = input.substring(0, i) + input.substring(i + 1, length);
-            Set<String> subAnagrams = get(substringWithoutLeadingChar);
-            for (String subAnagram : subAnagrams) {
-                anagrams.add(leadingChar + subAnagram);
-            }
-        }
-
-        return anagrams;
+    for (int i = 0, length = input.length(); i < length; i++) {
+      final char leadingChar = input.charAt(i);
+      final String substringWithoutLeadingChar = input.substring(0, i) + input.substring(i + 1, length);
+      final Set<String> subAnagrams = get(substringWithoutLeadingChar);
+      for (final String subAnagram : subAnagrams) {
+        anagrams.add(leadingChar + subAnagram);
+      }
     }
+
+    return anagrams;
+  }
 
 }

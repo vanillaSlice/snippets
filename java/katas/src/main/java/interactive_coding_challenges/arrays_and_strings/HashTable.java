@@ -10,37 +10,40 @@ import java.util.NoSuchElementException;
  */
 public final class HashTable {
 
-    private final int size;
-    private final String[] array;
+  private final int size;
+  private final String[] array;
 
-    public HashTable(int size) {
-        this.size = size;
-        this.array = new String[this.size];
+  public HashTable(final int size) {
+    this.size = size;
+    if (this.size < 0) {
+      throw new IllegalArgumentException("size cannot be less than 0 but was " + this.size);
     }
+    this.array = new String[this.size];
+  }
 
-    private int getHashCode(int key) {
-        return key % size;
-    }
+  private int getHashCode(final int key) {
+    return key % size;
+  }
 
-    public void set(int key, String value) {
-        array[getHashCode(key)] = value;
-    }
+  public void set(final int key, final String value) {
+    array[getHashCode(key)] = value;
+  }
 
-    public String get(int key) {
-        String value = array[getHashCode(key)];
-        if (value == null) {
-            throw new NoSuchElementException("No value at " + key);
-        }
-        return value;
+  public String get(final int key) {
+    final String value = array[getHashCode(key)];
+    if (value == null) {
+      throw new NoSuchElementException("No value at " + key);
     }
+    return value;
+  }
 
-    public void remove(int key) {
-        int hashCode = getHashCode(key);
-        String value = array[hashCode];
-        if (value == null) {
-            throw new NoSuchElementException("No value at " + key);
-        }
-        array[hashCode] = null;
+  public void remove(final int key) {
+    final int hashCode = getHashCode(key);
+    final String value = array[hashCode];
+    if (value == null) {
+      throw new NoSuchElementException("No value at " + key);
     }
+    array[hashCode] = null;
+  }
 
 }

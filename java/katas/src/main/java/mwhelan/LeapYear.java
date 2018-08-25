@@ -8,15 +8,19 @@ package mwhelan;
  *
  * @author Mike Lowe
  */
-public class LeapYear {
+public final class LeapYear {
 
-    public static boolean isLeapYear(int year) {
-        if (year % 4 != 0) {
-            return false;
-        } else if (year % 100 == 0) {
-            return year % 400 == 0;
-        }
-        return true;
+  // don't want instances
+  private LeapYear() {
+  }
+
+  public static boolean isLeapYear(final int year) {
+    if (year % 4 != 0) {
+      return false;
+    } else if (year % 100 == 0) {
+      return year % 400 == 0;
     }
+    return true;
+  }
 
 }

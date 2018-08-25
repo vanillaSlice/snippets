@@ -1,54 +1,61 @@
 package mwhelan;
 
 /**
- * PROBLEM
- * Given a number i return:
- * - "Fizz" if i is divisible by 3
- * - "Buzz" if i is divisible by 5
- * - "mwhelan.FizzBuzz" if i is divisible by 3 and 5
- * - "Whizz" if i is a prime number
- * - "FizzWhizz" if i is divisible by 3 and a prime number (i.e. 3 itself)
- * - "BuzzWhizz" if i is divisible by 5 and a prime number (i.e. 5 itself)
- * - i as a string if i does not meet any of these conditions
+ * PROBLEM:
+ * Given a number n return:
+ * - "Fizz" if n is divisible by 3
+ * - "Buzz" if n is divisible by 5
+ * - "FizzBuzz" if n is divisible by 3 and 5
+ * - "Whizz" if n is a prime number
+ * - "FizzWhizz" if n is divisible by 3 and a prime number (i.e. 3 itself)
+ * - "BuzzWhizz" if n is divisible by 5 and a prime number (i.e. 5 itself)
+ * - n as a string if n does not meet any of these conditions
  *
  * @author Mike Lowe
  */
-public class FizzBuzzWhizz {
+public final class FizzBuzzWhizz {
 
-    public String evaluate(int i) {
-        StringBuilder builder = new StringBuilder();
+  // don't want instances
+  private FizzBuzzWhizz() {
+  }
 
-        boolean isDivisibleBy3 = i % 3 == 0;
-        boolean isDivisibleBy5 = i % 5 == 0;
-        boolean isPrime = isPrime(i);
+  public static String evaluate(final int n) {
+    final StringBuilder message = new StringBuilder();
 
-        if (isDivisibleBy3) {
-            builder.append("Fizz");
-        }
-        if (isDivisibleBy5) {
-            builder.append("Buzz");
-        }
-        if (isPrime) {
-            builder.append("Whizz");
-        }
-        if (!isDivisibleBy3 && !isDivisibleBy5 && !isPrime) {
-            builder.append(i);
-        }
+    final boolean isDivisibleBy3 = n % 3 == 0;
+    final boolean isDivisibleBy5 = n % 5 == 0;
+    final boolean isPrime = isPrime(n);
 
-        return builder.toString();
+    if (isDivisibleBy3) {
+      message.append("Fizz");
+    }
+    if (isDivisibleBy5) {
+      message.append("Buzz");
+    }
+    if (isPrime) {
+      message.append("Whizz");
+    }
+    if (message.length() == 0) {
+      message.append(n);
     }
 
-    private boolean isPrime(int i) {
-        if (i < 2) {
-            return false;
-        }
-        int mid = i / 2;
-        for (int j = 2; j <= mid; j++) {
-            if (i % j == 0) {
-                return false;
-            }
-        }
-        return true;
+    return message.toString();
+  }
+
+  private static boolean isPrime(final int n) {
+    if (n < 2) {
+      return false;
     }
+
+    final double maxPossibleDivisor = Math.floor(Math.sqrt(n));
+
+    for (int i = 2; i <= maxPossibleDivisor; i++) {
+      if (n % i == 0) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
 }

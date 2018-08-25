@@ -2,47 +2,53 @@ package mwhelan;
 
 /**
  * PROBLEM:
- * Given a number i return the mwhelan.Fibonacci number at this
+ * Given a number n return the Fibonacci number at this
  * position.
  *
  * @author Mike Lowe
  */
-public class Fibonacci {
+public final class Fibonacci {
 
-    /*
-     * Non-recursive solution.
-     */
+  // don't want instances
+  private Fibonacci() {
+  }
 
-    public static int calculate(int i) {
-        if (i == 0) {
-            return 0;
-        } else if (i == 1) {
-            return 1;
-        } else {
-            int total = 1;
-            int prev1 = 1;
-            int prev2 = 0;
-            for (int j = 2; j <= i; j++) {
-                total = prev1 + prev2;
-                prev2 = prev1;
-                prev1 = total;
-            }
-            return total;
-        }
+  /*
+   * Non-recursive solution.
+   */
+
+  public static int calculate(final int n) {
+    if (n < 0) {
+      throw new IllegalArgumentException("n cannot be less than 0 but was " + n);
+    }
+    if (n < 2) {
+      return n;
     }
 
-    /*
-     * Recursive solution (not as efficient).
-     */
+    int result = 1;
+    int prev1 = 1;
+    int prev2 = 0;
+    for (int j = 2; j <= n; j++) {
+      result = prev1 + prev2;
+      prev2 = prev1;
+      prev1 = result;
+    }
+    return result;
+  }
 
-//    public static int calculate(int i) {
-//        if (i == 0) {
-//            return 0;
-//        } else if (i == 1) {
-//            return 1;
-//        } else {
-//            return calculate(i - 1) + calculate(i - 2);
-//        }
+  /*
+   * Recursive solution (not as efficient).
+   */
+
+//  public static int calculate(final int n) {
+//    if (n < 0) {
+//      throw new IllegalArgumentException("n cannot be less than 0 but was " + n);
 //    }
+//    if (n < 2) {
+//      return n;
+//    }
+//
+//    return calculate(n - 1) + calculate(n - 2);
+//  }
 
 }

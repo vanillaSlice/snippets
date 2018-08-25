@@ -10,26 +10,26 @@ import java.util.Set;
  *
  * @author Mike Lowe
  */
-public class UniqueChars {
+public final class UniqueChars {
 
-    // don't want instances
-    private UniqueChars() {
-    }
+  // don't want instances
+  private UniqueChars() {
+  }
 
-    public static boolean hasUniqueChars(String input) {
-        if (input == null) {
-            return false;
-        }
-        Set<Character> foundChars = new HashSet<>();
-        for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
-            if (foundChars.contains(c)) {
-                return false;
-            } else {
-                foundChars.add(c);
-            }
-        }
-        return true;
+  public static boolean hasUniqueChars(final String input) {
+    if (input == null) {
+      return false;
     }
+    final Set<Character> foundChars = new HashSet<>();
+    for (int i = 0; i < input.length(); i++) {
+      final char c = input.charAt(i);
+      if (foundChars.contains(c)) {
+        return false;
+      } else {
+        foundChars.add(c);
+      }
+    }
+    return true;
+  }
 
 }
