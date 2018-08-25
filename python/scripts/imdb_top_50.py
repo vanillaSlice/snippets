@@ -23,7 +23,7 @@ print('Most Popular Feature Films Released in {}'.format(year))
 
 movies = soup.findAll('div', attrs={'class': 'lister-item mode-advanced'})
 for i, div_item in enumerate(movies):
-    div = div_item.find('div', attrs={'class': 'lister-item-content'})
-    header = div.findChildren('h3', attrs={'class': 'lister-item-header'})
-    movie = (header[0].findChildren('a'))[0].contents[0].encode('utf-8').decode('ascii', 'ignore')
-    print('{}. {}'.format(i + 1, movie))
+  div = div_item.find('div', attrs={'class': 'lister-item-content'})
+  header = div.findChildren('h3', attrs={'class': 'lister-item-header'})
+  movie = (header[0].findChildren('a'))[0].contents[0].encode('utf-8').decode('ascii', 'ignore')
+  print('{}. {}'.format(i + 1, movie))
