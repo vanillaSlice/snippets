@@ -3,7 +3,6 @@
     "test": "mocha"
   },
   "dependencies": {
-    "mocha": "^3.5.0",
-    "npm": "^6.4.0"
+    "mocha": "^6.1.4"
   }
 }
